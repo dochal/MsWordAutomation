@@ -1,0 +1,60 @@
+﻿<Window x:Class="MsWordAutomation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MsWordAutomation"
+        mc:Ignorable="d"
+        Title="MS Word Automation" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Word from CSV">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Label>Word Template</Label>
+                        <TextBox Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" Name="WordFilePath"/>
+                        <Button Content="Select" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="23" Name="SelectWordFileButton" Click="Button_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>CSV Values</Label>
+                        <TextBox Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" Name="ExcelFilePath"/>
+                        <Button Content="Select" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="23" Name="SelectExcelFileButton" Click="SelectExcelFileButton_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Format</Label>
+                        <TextBox Height="22" Text="$$Firstname$$ $$Surname$$ - Extension Letter - $$Date$$" Name="SaveFormat"  TextWrapping="Wrap"  Width="331"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Output Folder</Label>
+                        <TextBox Height="22" TextWrapping="Wrap" Name="OutputFolder"  Text="TextBox" Width="348"/>
+                        <Button Content="Select Folder" Width="75" Click="Button_Click_2" Height="22"/>
+                    </StackPanel>
+
+
+                    <StackPanel>
+                        <Button Click="Button_Click_1">Run</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Word to PDF">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Input Folder</Label>
+                        <TextBox Height="23" TextWrapping="Wrap" Name="DocxFolder" Width="400"/>
+                        <Button Content="Select Folder" Width="75" Name="FolderForDocx" Click="FolderForDocx_Click" Height="23"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Output Folder</Label>
+                        <TextBox Height="23" TextWrapping="Wrap"  Name="PdfFolder" Width="400"/>
+                        <Button Content="Select Folder" Width="75" Name="FolderForPdf" Click="FolderForPdf_Click" Height="23"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Name="ConvertToPdf" Click="ConvertToPdf_Click">Convert To PDF</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+    </DockPanel>
+</Window>
