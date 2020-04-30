@@ -6,16 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace MsWordAutomation
 {
@@ -46,12 +37,13 @@ namespace MsWordAutomation
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        { Microsoft.Office.Interop.Word.Application fileOpen = new Microsoft.Office.Interop.Word.Application();;
+        {
+            Microsoft.Office.Interop.Word.Application fileOpen = new Microsoft.Office.Interop.Word.Application(); ;
             try
             {
                 var header = File.ReadAllLines(ExcelFilePath.Text).FirstOrDefault().Split(',');
-                
-                        fileOpen.ScreenUpdating = false;
+                fileOpen.Visible = false;
+                fileOpen.ScreenUpdating = false;
                 using (var reader = new StreamReader(ExcelFilePath.Text))
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
@@ -59,7 +51,7 @@ namespace MsWordAutomation
                     foreach (var line in records)
                     {
                         //Open a already existing word file into the new document created
-                        Microsoft.Office.Interop.Word.Document document = fileOpen.Documents.Open(WordFilePath.Text, ReadOnly: false);
+                        Microsoft.Office.Interop.Word.Document document = fileOpen.Documents.Open(WordFilePath.Text, ReadOnly: true);
                         //Make the file visible 
                         document.Activate();
                         //The FindAndReplace takes the text to find under any formatting and replaces it with the
@@ -84,7 +76,8 @@ namespace MsWordAutomation
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            } finally
+            }
+            finally
             {
                 fileOpen?.Quit();
             }
@@ -168,10 +161,10 @@ namespace MsWordAutomation
 
             // C# doesn't have optional arguments so we'll need a dummy value
             object oMissing = System.Reflection.Missing.Value;
-            
+
             word.Visible = false;
             word.ScreenUpdating = false;
-            
+
             // Get list of Word files in specified directory
             DirectoryInfo dirInfo = new DirectoryInfo(DocxFolder.Text);
             FileInfo[] wordFiles = dirInfo.GetFiles("*.docx");
